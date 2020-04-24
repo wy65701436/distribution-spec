@@ -5,6 +5,7 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
+	"github.com/go-resty/resty/v2"
 	"log"
 	"os"
 	"strconv"
@@ -146,7 +147,9 @@ func init() {
 		reggie.WithUsernamePassword(username, password),
 		reggie.WithDebug(true),
 		reggie.WithUserAgent("distribution-spec-conformance-tests"),
-		reggie.WithAuthScope(authScope))
+		reggie.WithAuthScope(authScope),
+		reggie.WithRedirectPolicy(resty.NoRedirectPolicy()))
+
 	if err != nil {
 		panic(err)
 	}
